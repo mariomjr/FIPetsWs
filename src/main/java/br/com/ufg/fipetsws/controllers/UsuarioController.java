@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +24,7 @@ import br.com.ufg.fipetsws.services.UsuarioService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@RestController
+@RestController(value="Usuário")
 @RequestMapping("/usuario")
 @Api("Usuário")
 public class UsuarioController {
@@ -51,6 +53,19 @@ public class UsuarioController {
 			usuarioService.createOrUpdate(usuario.get());
 			response.setData(UsuarioMapper.INSTANCE.paraDto(usuario.get()));
 		}
+		return ResponseEntity.ok(response);
+	}
+	
+	@GetMapping(value="{id}")
+	@ApiOperation("Buscar por ID")
+	public ResponseEntity<Response<UsuarioDto>> findById(@PathVariable("id") String id){
+		Response<UsuarioDto> response = new Response<UsuarioDto>();
+		Optional<Usuario> usuario = usuarioService.findById(id);
+		if(usuario.isPresent() == false) {
+			response.getErrors().add("Registro não encontrado!");
+			return ResponseEntity.badRequest().body(response);
+		}
+		response.setData(UsuarioMapper.INSTANCE.paraDto(usuario.get()));
 		return ResponseEntity.ok(response);
 	}
 }
