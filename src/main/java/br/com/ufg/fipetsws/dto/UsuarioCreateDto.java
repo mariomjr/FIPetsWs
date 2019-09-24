@@ -4,17 +4,17 @@ public class UsuarioCreateDto {
 
 	private String nome;
 	
-	private String cpfCnpj;
+	private String telefone;
+	
+	private Long dataNascimento;
 	
 	private String email;
 	
-	private String senha;
+	private Long dataCadastro;
 	
-	private String telefone;
+	private Long dataUltimaAtualizacao;
 	
-	private String numeroCnh;
-	
-	private Long dataNascimento;
+	private String redeSocialContato;
 	
 
 	public String getNome() {
@@ -23,14 +23,6 @@ public class UsuarioCreateDto {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public String getCpfCnpj() {
-		return cpfCnpj;
-	}
-
-	public void setCpfCnpj(String cpfCnpj) {
-		this.cpfCnpj = cpfCnpj;
 	}
 
 	public String getEmail() {
@@ -49,14 +41,6 @@ public class UsuarioCreateDto {
 		this.telefone = telefone;
 	}
 
-	public String getNumeroCnh() {
-		return numeroCnh;
-	}
-
-	public void setNumeroCnh(String numeroCnh) {
-		this.numeroCnh = numeroCnh;
-	}
-
 	public Long getDataNascimento() {
 		return dataNascimento;
 	}
@@ -65,13 +49,27 @@ public class UsuarioCreateDto {
 		this.dataNascimento = dataNascimento;
 	}
 
-
-	public String getSenha() {
-		return senha;
+	public Long getDataCadastro() {
+		return dataCadastro;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setDataCadastro(Long dataCadastro) {
+		this.dataCadastro = dataCadastro;
 	}
-	
+
+	public Long getDataUltimaAtualizacao() {
+		return dataUltimaAtualizacao;
+	}
+
+	public void setDataUltimaAtualizacao(Long dataUltimaAtualizacao) {
+		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+	}
+
+	public String getRedeSocialContato() {
+		return redeSocialContato;
+	}
+
+	public void setRedeSocialContato(String redeSocialContato) {
+		this.redeSocialContato = redeSocialContato;
+	}
 }

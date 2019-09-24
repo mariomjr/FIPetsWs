@@ -1,13 +1,14 @@
 package br.com.ufg.fipetsws.entities;
 
-import java.io.Serializable;
+import javax.validation.constraints.Email;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-public class Usuario implements Serializable{
+@Document
+public class Usuario{
 	
-	private static final long serialVersionUID = 8646918060853291092L;
-
 	@Id
 	private String id;
 	
@@ -17,6 +18,8 @@ public class Usuario implements Serializable{
 	
 	private Long dataNascimento;
 	
+	@Indexed(unique = true)
+	@Email(message="E-mail inválido")
 	private String email;
 	
 	private Long dataCadastro;
@@ -26,7 +29,6 @@ public class Usuario implements Serializable{
 	private String redeSocialContato;
 	
 //	Endereço
-//	Rede social de contato
 //	Notificações
 
 	
