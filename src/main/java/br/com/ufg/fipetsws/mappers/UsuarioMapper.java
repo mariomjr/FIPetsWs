@@ -1,5 +1,7 @@
 package br.com.ufg.fipetsws.mappers;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -15,6 +17,8 @@ public interface UsuarioMapper {
 	UsuarioMapper INSTANCE = Mappers.getMapper(UsuarioMapper.class);
 	
 	UsuarioDto paraDto(Usuario usuario);
+	
+	List<UsuarioDto> paraDto(List<Usuario> usuario);
 	
     @Mappings(@Mapping(target = "id", ignore = true))
     Usuario doDto (UsuarioDto source);

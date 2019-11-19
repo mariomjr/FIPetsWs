@@ -1,5 +1,6 @@
 package br.com.ufg.fipetsws.services.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,11 @@ public class UsuarioServiceImpl implements UsuarioService{
 	@Override
 	public Optional<Usuario> findById(String id) {
 		return this.usuarioRepository.findById(id);
+	}
+
+	@Override
+	public List<Usuario> findAll() {
+		return this.usuarioRepository.findAll();
 	}
 
 }

@@ -1,5 +1,6 @@
 package br.com.ufg.fipetsws.controllers;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -66,6 +67,19 @@ public class UsuarioController {
 			return ResponseEntity.badRequest().body(response);
 		}
 		response.setData(UsuarioMapper.INSTANCE.paraDto(usuario.get()));
+		return ResponseEntity.ok(response);
+	}
+	
+	@GetMapping
+	@ApiOperation("Listar usuários")
+	public ResponseEntity<Response<List<UsuarioDto>>> get(){
+		Response<List<UsuarioDto>> response = new Response<List<UsuarioDto>>();
+		List<Usuario> listUsuario = usuarioService.findAll();
+		if(listUsuario.isEmpty()) {
+			response.getErrors().add("Nenhuma raça cadastrada");
+			return ResponseEntity.badRequest().body(response);
+		}
+		response.setData(UsuarioMapper.INSTANCE.paraDto(listUsuario));
 		return ResponseEntity.ok(response);
 	}
 }
