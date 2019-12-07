@@ -1,5 +1,7 @@
 package br.com.ufg.fipetsws.dto;
 
+import java.util.List;
+
 import br.com.ufg.fipetsws.enums.EnumTipoAnuncio;
 
 public class AnuncioCreateDto {
@@ -21,6 +23,8 @@ public class AnuncioCreateDto {
 	private String status;
 	
 	private Long dataEncontradoPerdido;
+	
+	private List<String> imagens;
 	
 	public ObjectIdDto getUsuario() {
 		return usuario;
@@ -93,5 +97,14 @@ public class AnuncioCreateDto {
 	public void setDataEncontradoPerdido(Long dataEncontradoPerdido) {
 		this.dataEncontradoPerdido = dataEncontradoPerdido;
 	}
+
+	public List<String> getImagens() {
+		return imagens;
+	}
+
+	public void setImagens(List<String> imagens) {
+		this.imagens = imagens;
+	}
+	
 
 }
