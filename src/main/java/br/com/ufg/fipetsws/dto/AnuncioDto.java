@@ -1,5 +1,7 @@
 package br.com.ufg.fipetsws.dto;
 
+import java.util.List;
+
 import br.com.ufg.fipetsws.enums.EnumTipoAnuncio;
 
 public class AnuncioDto {
@@ -27,6 +29,8 @@ public class AnuncioDto {
 	private Long dataCriacao;
 	
 	private Long dataAtualizacao;
+	
+	private List<String> imagens;
 
 	public String getId() {
 		return id;
@@ -123,4 +127,13 @@ public class AnuncioDto {
 	public void setDataAtualizacao(Long dataAtualizacao) {
 		this.dataAtualizacao = dataAtualizacao;
 	}
+
+	public List<String> getImagens() {
+		return imagens;
+	}
+
+	public void setImagens(List<String> imagens) {
+		this.imagens = imagens;
+	}
+	
 }

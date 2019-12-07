@@ -42,6 +42,8 @@ public class Anuncio{
 	
 	private List<Usuario> seguidores;
 	
+	private List<String> imagens;
+	
 	public Anuncio() {}
 	
 	public Anuncio(String id) {
@@ -160,4 +162,11 @@ public class Anuncio{
 		this.seguidores = seguidores;
 	}
 
+	public List<String> getImagens() {
+		return imagens;
+	}
+
+	public void setImagens(List<String> imagens) {
+		this.imagens = imagens;
+	}
 }
