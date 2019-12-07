@@ -86,7 +86,7 @@ public class RacaController {
 	
 	@GetMapping(value="tipo/{tipo}")
 	@ApiOperation("Listar raças por tipo")
-	public ResponseEntity<Response<List<RacaDto>>> get(@PathVariable("id") EnumTipoAnimal tipoAnimal){
+	public ResponseEntity<Response<List<RacaDto>>> get(@PathVariable("tipo") EnumTipoAnimal tipoAnimal){
 		Response<List<RacaDto>> response = new Response<List<RacaDto>>();
 		List<Raca> listRaca = racaService.findByTipo(tipoAnimal);
 		if(listRaca.isEmpty()) {
