@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.ufg.fipetsws.dto.RacaCreateDto;
 import br.com.ufg.fipetsws.dto.RacaDto;
 import br.com.ufg.fipetsws.entities.Raca;
+import br.com.ufg.fipetsws.enums.EnumTipoAnimal;
 import br.com.ufg.fipetsws.mappers.RacaMapper;
 import br.com.ufg.fipetsws.response.Response;
 import br.com.ufg.fipetsws.services.RacaService;
@@ -75,6 +76,19 @@ public class RacaController {
 	public ResponseEntity<Response<List<RacaDto>>> get(){
 		Response<List<RacaDto>> response = new Response<List<RacaDto>>();
 		List<Raca> listRaca = racaService.findAll();
+		if(listRaca.isEmpty()) {
+			response.getErrors().add("Nenhuma raça cadastrada");
+			return ResponseEntity.badRequest().body(response);
+		}
+		response.setData(RacaMapper.INSTANCE.paraDto(listRaca));
+		return ResponseEntity.ok(response);
+	}
+	
+	@GetMapping(value="tipo/{tipo}")
+	@ApiOperation("Listar raças por tipo")
+	public ResponseEntity<Response<List<RacaDto>>> get(@PathVariable("id") EnumTipoAnimal tipoAnimal){
+		Response<List<RacaDto>> response = new Response<List<RacaDto>>();
+		List<Raca> listRaca = racaService.findByTipo(tipoAnimal);
 		if(listRaca.isEmpty()) {
 			response.getErrors().add("Nenhuma raça cadastrada");
 			return ResponseEntity.badRequest().body(response);

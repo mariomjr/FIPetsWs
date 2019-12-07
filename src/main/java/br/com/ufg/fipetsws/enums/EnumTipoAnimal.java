@@ -3,8 +3,7 @@ package br.com.ufg.fipetsws.enums;
 public enum EnumTipoAnimal {
 
 	GATO("Gato"), 
-	CACHORRO("Cachorro"), 
-	OUTRO("Outro");
+	CACHORRO("Cachorro");
 	
 	private String label;
 	

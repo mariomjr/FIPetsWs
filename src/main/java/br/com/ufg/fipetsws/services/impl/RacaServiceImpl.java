@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.ufg.fipetsws.entities.Raca;
+import br.com.ufg.fipetsws.enums.EnumTipoAnimal;
 import br.com.ufg.fipetsws.repositories.RacaRepository;
 import br.com.ufg.fipetsws.services.RacaService;
 
@@ -29,6 +30,11 @@ public class RacaServiceImpl implements RacaService{
 	@Override
 	public List<Raca> findAll() {
 		return this.racaRepository.findAll();
+	}
+
+	@Override
+	public List<Raca> findByTipo(EnumTipoAnimal tipo) {
+		return this.racaRepository.findByTipo(tipo);
 	}
 
 }

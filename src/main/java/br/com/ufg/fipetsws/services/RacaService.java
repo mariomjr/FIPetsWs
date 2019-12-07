@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Component;
 
 import br.com.ufg.fipetsws.entities.Raca;
+import br.com.ufg.fipetsws.enums.EnumTipoAnimal;
 
 @Component
 public interface RacaService {
@@ -15,4 +16,6 @@ public interface RacaService {
 	Optional<Raca> findById(String id);
 	
 	List<Raca> findAll();
+	
+	List<Raca> findByTipo(EnumTipoAnimal tipo);
 }
