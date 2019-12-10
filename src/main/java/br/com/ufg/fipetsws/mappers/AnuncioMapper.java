@@ -6,13 +6,14 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
+import org.mapstruct.NullValueCheckStrategy;
 import org.mapstruct.factory.Mappers;
 
 import br.com.ufg.fipetsws.dto.AnuncioCreateDto;
 import br.com.ufg.fipetsws.dto.AnuncioDto;
 import br.com.ufg.fipetsws.entities.Anuncio;
 
-@Mapper
+@Mapper(nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public interface AnuncioMapper {
 	AnuncioMapper INSTANCE = Mappers.getMapper(AnuncioMapper.class);
 	

@@ -40,8 +40,6 @@ public class Anuncio{
 	
 	private Long visualizacoes;
 	
-	private List<Usuario> seguidores;
-	
 	private List<String> imagens;
 	
 	public Anuncio() {}
@@ -154,14 +152,6 @@ public class Anuncio{
 		this.visualizacoes = visualizacoes;
 	}
 
-	public List<Usuario> getSeguidores() {
-		return seguidores;
-	}
-
-	public void setSeguidores(List<Usuario> seguidores) {
-		this.seguidores = seguidores;
-	}
-
 	public List<String> getImagens() {
 		return imagens;
 	}
@@ -169,4 +159,5 @@ public class Anuncio{
 	public void setImagens(List<String> imagens) {
 		this.imagens = imagens;
 	}
+	
 }

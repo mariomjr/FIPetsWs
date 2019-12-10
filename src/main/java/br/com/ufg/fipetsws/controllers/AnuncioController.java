@@ -21,10 +21,12 @@ import br.com.ufg.fipetsws.dto.AnuncioCreateDto;
 import br.com.ufg.fipetsws.dto.AnuncioDto;
 import br.com.ufg.fipetsws.entities.Animal;
 import br.com.ufg.fipetsws.entities.Anuncio;
+import br.com.ufg.fipetsws.entities.Usuario;
 import br.com.ufg.fipetsws.mappers.AnuncioMapper;
 import br.com.ufg.fipetsws.response.Response;
 import br.com.ufg.fipetsws.services.AnimalService;
 import br.com.ufg.fipetsws.services.AnuncioService;
+import br.com.ufg.fipetsws.services.UsuarioService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -38,6 +40,9 @@ public class AnuncioController {
 	
 	@Autowired
 	AnimalService animalService;
+	
+	@Autowired
+	UsuarioService usuarioService;
 
 	@PostMapping
 	@ApiOperation("Criação de anúncio")
@@ -47,6 +52,10 @@ public class AnuncioController {
 		Anuncio anuncioCreate = AnuncioMapper.INSTANCE.doCreateDto(anuncio);
 		anuncioCreate.getAnimal().setDataCriacao(Calendar.getInstance().getTimeInMillis());
 		Animal animal = animalService.createOrUpdate(anuncioCreate.getAnimal());
+		Optional<Usuario> usuario = usuarioService.findById(animal.getUsuario().getId());
+		Optional<Usuario> usuarioAnuncio = usuarioService.findById(anuncioCreate.getUsuario().getId());
+		animal.setUsuario(usuario.get());
+		anuncioCreate.setUsuario(usuarioAnuncio.get());
 		anuncioCreate.setAnimal(animal);
 		anuncioCreate.setDataCriacao(Calendar.getInstance().getTimeInMillis());
 		anuncioCreate = anuncioService.createOrUpdate(anuncioCreate);
