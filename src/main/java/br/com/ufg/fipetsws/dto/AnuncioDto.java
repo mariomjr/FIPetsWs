@@ -16,9 +16,9 @@ public class AnuncioDto {
 	
 	private String descricao;
 	
-	private Long latitude;
+	private Double latitude;
 	
-	private Long longitude;
+	private Double longitude;
 	
 	private String endereco;
 	
@@ -72,21 +72,7 @@ public class AnuncioDto {
 		this.descricao = descricao;
 	}
 
-	public Long getLatitude() {
-		return latitude;
-	}
 
-	public void setLatitude(Long latitude) {
-		this.latitude = latitude;
-	}
-
-	public Long getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(Long longitude) {
-		this.longitude = longitude;
-	}
 
 	public String getEndereco() {
 		return endereco;
@@ -134,6 +120,22 @@ public class AnuncioDto {
 
 	public void setImagens(List<String> imagens) {
 		this.imagens = imagens;
+	}
+
+	public Double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+
+	public Double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
 	}
 	
 }

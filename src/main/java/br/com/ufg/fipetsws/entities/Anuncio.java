@@ -24,9 +24,9 @@ public class Anuncio{
 	
 	private String descricao;
 	
-	private Long latitude;
+	private Double latitude;
 	
-	private Long longitude;
+	private Double longitude;
 	
 	private String endereco;
 	
@@ -88,19 +88,19 @@ public class Anuncio{
 		this.descricao = descricao;
 	}
 
-	public Long getLatitude() {
+	public Double getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(Long latitude) {
+	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
 
-	public Long getLongitude() {
+	public Double getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(Long longitude) {
+	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
 
