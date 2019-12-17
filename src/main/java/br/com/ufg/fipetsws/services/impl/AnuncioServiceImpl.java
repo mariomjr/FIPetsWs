@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import br.com.ufg.fipetsws.entities.Anuncio;
@@ -29,6 +31,11 @@ public class AnuncioServiceImpl implements AnuncioService{
 	@Override
 	public List<Anuncio> findAll() {
 		return this.anuncioRepository.findAll();
+	}
+
+	@Override
+	public Page<Anuncio> listAnuncio(int page, int count) {
+		return this.anuncioRepository.findAll(PageRequest.of(page, count));
 	}
 
 }	
