@@ -1,12 +1,12 @@
 package br.com.ufg.fipetsws.controllers;
 
 import java.util.Calendar;
-import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -91,11 +91,11 @@ public class AnuncioController {
 		return ResponseEntity.ok(response);
 	}
 	
-	@GetMapping
+	@GetMapping(value ="{page}/{count}")
 	@ApiOperation("Listar anuncios")
-	public ResponseEntity<Response<List<AnuncioDto>>> get(){
-		Response<List<AnuncioDto>> response = new Response<List<AnuncioDto>>();
-		List<Anuncio> listAnucio = anuncioService.findAll();
+	public ResponseEntity<Response<Page<AnuncioDto>>> get(HttpServletRequest request, @PathVariable("page") int page, @PathVariable("count") int count){
+		Response<Page<AnuncioDto>> response = new Response<Page<AnuncioDto>>();
+		Page<Anuncio> listAnucio = anuncioService.listAnuncio(page, count);
 		if(listAnucio.isEmpty()) {
 			response.getErrors().add("Nenhum anúncio cadastrado!");
 			return ResponseEntity.badRequest().body(response);
@@ -103,4 +103,5 @@ public class AnuncioController {
 		response.setData(AnuncioMapper.INSTANCE.paraDto(listAnucio));
 		return ResponseEntity.ok(response);
 	}
+	
 }
