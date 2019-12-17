@@ -1,6 +1,7 @@
 package br.com.ufg.fipetsws.controllers;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -93,14 +94,14 @@ public class AnuncioController {
 	
 	@GetMapping(value ="{page}/{count}")
 	@ApiOperation("Listar anuncios")
-	public ResponseEntity<Response<Page<AnuncioDto>>> get(HttpServletRequest request, @PathVariable("page") int page, @PathVariable("count") int count){
-		Response<Page<AnuncioDto>> response = new Response<Page<AnuncioDto>>();
+	public ResponseEntity<Response<List<AnuncioDto>>> get(HttpServletRequest request, @PathVariable("page") int page, @PathVariable("count") int count){
+		Response<List<AnuncioDto>> response = new Response<List<AnuncioDto>>();
 		Page<Anuncio> listAnucio = anuncioService.listAnuncio(page, count);
 		if(listAnucio.isEmpty()) {
 			response.getErrors().add("Nenhum anúncio cadastrado!");
 			return ResponseEntity.badRequest().body(response);
 		}
-		response.setData(AnuncioMapper.INSTANCE.paraDto(listAnucio));
+		response.setData(AnuncioMapper.INSTANCE.paraDto(listAnucio.getContent()));
 		return ResponseEntity.ok(response);
 	}
 	
