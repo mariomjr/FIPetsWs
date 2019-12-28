@@ -105,4 +105,25 @@ public class AnuncioController {
 		return ResponseEntity.ok(response);
 	}
 	
+	@PutMapping("seguir/{idUsuario}/{idAnuncio}")
+	@ApiOperation("Seguir anuncio anuncio")
+	public ResponseEntity<Response<String>> seguir(HttpServletRequest request, 
+			@PathVariable("idUsuario") String idUsuario, @PathVariable("idAnuncio")String idAnucio,
+			BindingResult result){
+		Response<String> response = new Response<String>();
+		Optional<Anuncio> anuncio = anuncioService.findById(idAnucio);
+		if(anuncio.isPresent() == false) {
+			response.getErrors().add("Anúncio não encontrado!");
+			return ResponseEntity.badRequest().body(response);
+		}
+		Optional<Usuario> usuario = usuarioService.findById(idUsuario);
+		if(usuario.isPresent() == false) {
+			response.getErrors().add("Usuário não encontrado!");
+			return ResponseEntity.badRequest().body(response);
+		}
+		usuario.get().getListAnuncioSeguidos().add(anuncio.get());
+		response.setData("Seguindo");
+		return ResponseEntity.ok(response);
+	}
+	
 }

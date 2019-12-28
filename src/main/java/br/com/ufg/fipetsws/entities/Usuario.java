@@ -1,9 +1,13 @@
 package br.com.ufg.fipetsws.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.constraints.Email;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
@@ -27,6 +31,9 @@ public class Usuario{
 	private Long dataUltimaAtualizacao;
 	
 	private String redeSocialContato;
+	
+	@DBRef
+	private List<Anuncio> listAnuncioSeguidos;
 	
 //	Endereço
 //	Notificações
@@ -102,4 +109,15 @@ public class Usuario{
 		this.redeSocialContato = redeSocialContato;
 	}
 
+	public List<Anuncio> getListAnuncioSeguidos() {
+		if(listAnuncioSeguidos == null) {
+			listAnuncioSeguidos = new ArrayList<Anuncio>();
+		}
+		return listAnuncioSeguidos;
+	}
+
+	public void setListAnuncioSeguidos(List<Anuncio> listAnuncioSeguidos) {
+		this.listAnuncioSeguidos = listAnuncioSeguidos;
+	}
+	
 }

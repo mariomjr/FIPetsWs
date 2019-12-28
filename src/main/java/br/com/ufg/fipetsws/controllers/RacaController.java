@@ -44,6 +44,21 @@ public class RacaController {
 		return ResponseEntity.ok(response);
 	}
 	
+	/*@PostMapping(value="list/{tipo}")
+	@ApiOperation("Criação de raças")
+	public ResponseEntity<String> createList(HttpServletRequest request, @RequestBody List<String> listStrRaca, @PathVariable("tipo") EnumTipoAnimal tipo,
+			BindingResult result){
+		for (String racaStr : listStrRaca) {
+			if(racaService.findByNomeRaca(racaStr).isPresent() == false) {
+				Raca raca = new Raca();
+				raca.setNomeRaca(racaStr);
+				raca.setTipo(tipo);
+				racaService.createOrUpdate(raca);
+			}
+		}
+		return ResponseEntity.ok("Ok");
+	}*/
+	
 	@PutMapping
 	@ApiOperation("Update na raça")
 	public ResponseEntity<Response<RacaDto>> update(HttpServletRequest request, @RequestBody RacaDto usuarioDto,

@@ -15,6 +15,8 @@ public interface RacaService {
 	
 	Optional<Raca> findById(String id);
 	
+	Optional<Raca> findByNomeRaca(String nomeRaca);
+	
 	List<Raca> findAll();
 	
 	List<Raca> findByTipo(EnumTipoAnimal tipo);

@@ -37,4 +37,9 @@ public class RacaServiceImpl implements RacaService{
 		return this.racaRepository.findByTipo(tipo);
 	}
 
+	@Override
+	public Optional<Raca> findByNomeRaca(String nomeRaca) {
+		return this.racaRepository.findByNomeRaca(nomeRaca);
+	}
+
 }
