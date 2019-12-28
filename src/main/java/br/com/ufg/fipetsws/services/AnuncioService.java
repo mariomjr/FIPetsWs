@@ -18,4 +18,6 @@ public interface AnuncioService {
 	List<Anuncio> findAll();
 	
 	Page<Anuncio> listAnuncio(int page, int count);
+	
+	Page<Anuncio> listAnuncioRaio(int page, int count, Double latitude, Double longitude);
 }

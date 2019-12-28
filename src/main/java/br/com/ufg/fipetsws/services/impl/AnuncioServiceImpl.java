@@ -38,4 +38,9 @@ public class AnuncioServiceImpl implements AnuncioService{
 		return this.anuncioRepository.findAll(PageRequest.of(page, count));
 	}
 
+	@Override
+	public Page<Anuncio> listAnuncioRaio(int page, int count, Double latitude, Double longitude) {
+		return this.anuncioRepository.findAnuncioRaio(PageRequest.of(page, count), latitude, longitude);
+	}
+
 }	

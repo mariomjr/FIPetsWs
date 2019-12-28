@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.QueryParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -97,6 +98,22 @@ public class AnuncioController {
 	public ResponseEntity<Response<List<AnuncioDto>>> get(HttpServletRequest request, @PathVariable("page") int page, @PathVariable("count") int count){
 		Response<List<AnuncioDto>> response = new Response<List<AnuncioDto>>();
 		Page<Anuncio> listAnucio = anuncioService.listAnuncio(page, count);
+		if(listAnucio.isEmpty()) {
+			response.getErrors().add("Nenhum anúncio cadastrado!");
+			return ResponseEntity.badRequest().body(response);
+		}
+		response.setData(AnuncioMapper.INSTANCE.paraDto(listAnucio.getContent()));
+		return ResponseEntity.ok(response);
+	}
+	
+	@GetMapping(value ="raio/{page}/{count}")
+	@ApiOperation("Listar anuncios no raio")
+	public ResponseEntity<Response<List<AnuncioDto>>> getAnuncioRaio(@PathVariable("page") int page, 
+			@PathVariable("count") int count,
+			@QueryParam("latitude") Double latitude, 
+			@QueryParam("longitude") Double longitude){
+		Response<List<AnuncioDto>> response = new Response<List<AnuncioDto>>();
+		Page<Anuncio> listAnucio = anuncioService.listAnuncioRaio(page, count, latitude, longitude);
 		if(listAnucio.isEmpty()) {
 			response.getErrors().add("Nenhum anúncio cadastrado!");
 			return ResponseEntity.badRequest().body(response);
