@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.QueryParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ufg.fipetsws.dto.AnuncioCreateDto;
 import br.com.ufg.fipetsws.dto.AnuncioDto;
+import br.com.ufg.fipetsws.dto.RaioConsultaDto;
 import br.com.ufg.fipetsws.entities.Animal;
 import br.com.ufg.fipetsws.entities.Anuncio;
 import br.com.ufg.fipetsws.entities.Usuario;
@@ -106,14 +106,13 @@ public class AnuncioController {
 		return ResponseEntity.ok(response);
 	}
 	
-	@GetMapping(value ="raio/{page}/{count}")
+	@PostMapping(value ="raio/{page}/{count}")
 	@ApiOperation("Listar anuncios no raio")
 	public ResponseEntity<Response<List<AnuncioDto>>> getAnuncioRaio(@PathVariable("page") int page, 
 			@PathVariable("count") int count,
-			@QueryParam("latitude") Double latitude, 
-			@QueryParam("longitude") Double longitude){
+			@RequestBody RaioConsultaDto raioConsulta){
 		Response<List<AnuncioDto>> response = new Response<List<AnuncioDto>>();
-		Page<Anuncio> listAnucio = anuncioService.listAnuncioRaio(page, count, latitude, longitude);
+		Page<Anuncio> listAnucio = anuncioService.listAnuncioRaio(page, count, raioConsulta.getLatitude(), raioConsulta.getLongitude());
 		if(listAnucio.isEmpty()) {
 			response.getErrors().add("Nenhum anúncio cadastrado!");
 			return ResponseEntity.badRequest().body(response);
