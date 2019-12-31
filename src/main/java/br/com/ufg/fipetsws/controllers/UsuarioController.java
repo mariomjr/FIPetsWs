@@ -21,6 +21,9 @@ import br.com.ufg.fipetsws.dto.UsuarioDto;
 import br.com.ufg.fipetsws.entities.Usuario;
 import br.com.ufg.fipetsws.mappers.UsuarioMapper;
 import br.com.ufg.fipetsws.response.Response;
+import br.com.ufg.fipetsws.security.firebase.AuthRequest;
+import br.com.ufg.fipetsws.security.firebase.LoginResponse;
+import br.com.ufg.fipetsws.services.AuthFirebaseService;
 import br.com.ufg.fipetsws.services.UsuarioService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -32,15 +35,27 @@ public class UsuarioController {
 	
 	@Autowired
 	UsuarioService usuarioService;
+	
+	@Autowired
+	AuthFirebaseService authFirebaseService;
 
 	@PostMapping
 	@ApiOperation("Criação do usuário")
 	public ResponseEntity<Response<UsuarioDto>> create(HttpServletRequest request, @RequestBody UsuarioCreateDto usuario,
 			BindingResult result){
 		Response<UsuarioDto> response = new Response<UsuarioDto>();
-		Usuario usuarioCreate = usuarioService.createOrUpdate(UsuarioMapper.INSTANCE.doCreateDto(usuario));
-		response.setData(UsuarioMapper.INSTANCE.paraDto(usuarioCreate));
-		return ResponseEntity.ok(response);
+		try {
+			LoginResponse loginResponse = authFirebaseService.criarUsuario(new AuthRequest(usuario.getEmail(), usuario.getPassword()));
+			Usuario usuarioCre = UsuarioMapper.INSTANCE.doCreateDto(usuario);
+			usuarioCre.setUidFirebase(loginResponse.getLocalId());
+			Usuario usuarioCreate = usuarioService.createOrUpdate(usuarioCre);
+			response.setData(UsuarioMapper.INSTANCE.paraDto(usuarioCreate));
+			return ResponseEntity.ok(response);
+		} catch (Exception e) {
+			response.getErrors().add(e.getMessage());
+			return ResponseEntity.ok(response);
+		}
+		
 	}
 	
 	@PutMapping

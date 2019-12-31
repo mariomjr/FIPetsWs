@@ -31,4 +31,9 @@ public class UsuarioServiceImpl implements UsuarioService{
 		return this.usuarioRepository.findAll();
 	}
 
+	@Override
+	public Optional<Usuario> findByEmail(String email) {
+		return this.usuarioRepository.findByEmail(email);
+	}
+
 }

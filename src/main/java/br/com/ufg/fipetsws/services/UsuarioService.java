@@ -14,5 +14,7 @@ public interface UsuarioService {
 	
 	Optional<Usuario> findById(String id);
 	
+	Optional<Usuario> findByEmail(String email);
+	
 	List<Usuario> findAll();
 }

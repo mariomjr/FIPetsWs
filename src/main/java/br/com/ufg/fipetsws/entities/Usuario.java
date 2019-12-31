@@ -35,6 +35,8 @@ public class Usuario{
 	@DBRef
 	private List<Anuncio> listAnuncioSeguidos;
 	
+	private String uidFirebase;
+	
 //	Endereço
 //	Notificações
 
@@ -118,6 +120,14 @@ public class Usuario{
 
 	public void setListAnuncioSeguidos(List<Anuncio> listAnuncioSeguidos) {
 		this.listAnuncioSeguidos = listAnuncioSeguidos;
+	}
+	
+	public String getUidFirebase() {
+		return uidFirebase;
+	}
+
+	public void setUidFirebase(String uidFirebase) {
+		this.uidFirebase = uidFirebase;
 	}
 
 	@Override

@@ -3,15 +3,19 @@ package br.com.ufg.fipetsws.configs;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.ws.rs.core.HttpHeaders;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
+import io.swagger.models.auth.In;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.ApiKey;
 import springfox.documentation.service.AuthorizationScope;
 import springfox.documentation.service.SecurityReference;
 import springfox.documentation.spi.DocumentationType;
@@ -29,8 +33,8 @@ public class SwaggerConfig extends WebMvcConfigurationSupport{
           .apis(RequestHandlerSelectors.basePackage("br.com.ufg.fipetsws.controllers"))            
           .paths(PathSelectors.any())
           .build()                                           
-//          .securitySchemes(Arrays.asList(new ApiKey("Token Access", HttpHeaders.AUTHORIZATION, In.HEADER.name())))
-//          .securityContexts(Arrays.asList(securityContext()))
+          .securitySchemes(Arrays.asList(new ApiKey("Token Access", HttpHeaders.AUTHORIZATION, In.HEADER.name())))
+          .securityContexts(Arrays.asList(securityContext()))
           .apiInfo(metaData());
     }
     
