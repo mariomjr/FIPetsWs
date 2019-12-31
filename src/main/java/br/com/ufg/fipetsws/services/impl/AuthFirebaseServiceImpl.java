@@ -7,6 +7,7 @@ import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
@@ -28,8 +29,11 @@ public class AuthFirebaseServiceImpl implements AuthFirebaseService{
 //	private static final String APIKEY = "";	
 //	private static FirebaseAppp firebaseApp;
 	
+	@Value("${property.apikey}")
+	private String APIKEY;
+	
 	public String getApiKey(){
-		return System.getProperty("apiKeyFirebase");
+		return APIKEY;
 	}
 	
 	@Override
