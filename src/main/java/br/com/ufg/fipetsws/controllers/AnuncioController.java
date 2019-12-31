@@ -123,7 +123,7 @@ public class AnuncioController {
 	}
 	
 	@PutMapping("seguir/{idUsuario}/{idAnuncio}")
-	@ApiOperation("Seguir anuncio anuncio")
+	@ApiOperation("Seguir anuncio")
 	public ResponseEntity<Response<String>> seguir(
 			@PathVariable("idUsuario") String idUsuario, @PathVariable("idAnuncio")String idAnucio){
 		Response<String> response = new Response<String>();
@@ -142,6 +142,42 @@ public class AnuncioController {
 			usuarioService.createOrUpdate(usuario.get());
 		}
 		response.setData("Seguindo");
+		return ResponseEntity.ok(response);
+	}
+	
+	@PutMapping("desseguir/{idUsuario}/{idAnuncio}")
+	@ApiOperation("Desseguir anuncio")
+	public ResponseEntity<Response<String>> desseguir(
+			@PathVariable("idUsuario") String idUsuario, @PathVariable("idAnuncio")String idAnucio){
+		Response<String> response = new Response<String>();
+		Optional<Anuncio> anuncio = anuncioService.findById(idAnucio);
+		if(anuncio.isPresent() == false) {
+			response.getErrors().add("Anúncio não encontrado!");
+			return ResponseEntity.badRequest().body(response);
+		}
+		Optional<Usuario> usuario = usuarioService.findById(idUsuario);
+		if(usuario.isPresent() == false) {
+			response.getErrors().add("Usuário não encontrado!");
+			return ResponseEntity.badRequest().body(response);
+		}
+		if(usuario.get().getListAnuncioSeguidos().contains(anuncio.get())) {
+			usuario.get().getListAnuncioSeguidos().remove(anuncio.get());
+			usuarioService.createOrUpdate(usuario.get());
+		}
+		response.setData("Seguindo");
+		return ResponseEntity.ok(response);
+	}
+	
+	@GetMapping(value ="/usuario/{idUsuario}")
+	@ApiOperation("Listar anuncios do usuario")
+	public ResponseEntity<Response<List<AnuncioDto>>> get(HttpServletRequest request, @PathVariable("idUsuario") String idUsuario){
+		Response<List<AnuncioDto>> response = new Response<List<AnuncioDto>>();
+		Optional<Usuario> usuario = usuarioService.findById(idUsuario);
+		if(usuario.isPresent() == false) {
+			response.getErrors().add("Usuário não encontrado!");
+			return ResponseEntity.badRequest().body(response);
+		}
+		response.setData(AnuncioMapper.INSTANCE.paraDto(usuario.get().getListAnuncioSeguidos()));
 		return ResponseEntity.ok(response);
 	}
 	
