@@ -25,9 +25,12 @@ public class AuthFirebaseServiceImpl implements AuthFirebaseService{
 	private static final String ENDPOINT_AUTH = "/v1/accounts:signInWithPassword?key=";
 	private static final String ENDPOINT_CREATE = "/v1/accounts:signUp?key=";
 	private static final String ENDPOINT_CONSULTA = "/v1/accounts:lookup?key=";
-	private static final String APIKEY = "AIzaSyD0SLBMPOG-VhLZt24s1usDpMCw-8xvFLc";	
+//	private static final String APIKEY = "";	
 //	private static FirebaseAppp firebaseApp;
 	
+	public String getApiKey(){
+		return System.getProperty("apiKeyFirebase");
+	}
 	
 	@Override
 	public LoginResponse autenticar(AuthRequest authRequest) throws Exception {
@@ -35,7 +38,7 @@ public class AuthFirebaseServiceImpl implements AuthFirebaseService{
 		LoginRequest loginRequest = new LoginRequest(authRequest.getEmail(), authRequest.getPassword(), true);
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		Gson gson = new Gson();
-		HttpPost httpPost = new HttpPost(BASE_URL+ENDPOINT_AUTH+APIKEY);
+		HttpPost httpPost = new HttpPost(BASE_URL+ENDPOINT_AUTH+getApiKey());
 		httpPost.addHeader("Content-Type", "application/json;charset=UTF-8");
 		HttpEntity entity = new ByteArrayEntity(gson.toJson(loginRequest).getBytes("UTF-8"));
 		httpPost.setEntity(entity);
@@ -55,7 +58,7 @@ public class AuthFirebaseServiceImpl implements AuthFirebaseService{
 		LoginRequest loginRequest = new LoginRequest(authRequest.getEmail(), authRequest.getPassword(), true);
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		Gson gson = new Gson();
-		HttpPost httpPost = new HttpPost(BASE_URL+ENDPOINT_CREATE+APIKEY);
+		HttpPost httpPost = new HttpPost(BASE_URL+ENDPOINT_CREATE+getApiKey());
 		httpPost.addHeader("Content-Type", "application/json;charset=UTF-8");
 		HttpEntity entity = new ByteArrayEntity(gson.toJson(loginRequest).getBytes("UTF-8"));
 		httpPost.setEntity(entity);
@@ -75,7 +78,7 @@ public class AuthFirebaseServiceImpl implements AuthFirebaseService{
 		
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		Gson gson = new Gson();
-		HttpPost httpPost = new HttpPost(BASE_URL+ENDPOINT_CONSULTA+APIKEY);
+		HttpPost httpPost = new HttpPost(BASE_URL+ENDPOINT_CONSULTA+getApiKey());
 		httpPost.addHeader("Content-Type", "application/json;charset=UTF-8");
 		HttpEntity entity = new ByteArrayEntity(gson.toJson(new TokenRequest(token)).getBytes("UTF-8"));
 		httpPost.setEntity(entity);
