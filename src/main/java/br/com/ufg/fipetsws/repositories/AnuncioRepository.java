@@ -15,6 +15,13 @@ public interface AnuncioRepository  extends MongoRepository<Anuncio, String>{
 //			"      )";
 //
 //	@Query(value = SQL_RAIO_ANUNCIO)
-//	Page<Anuncio> findAnuncioRaio(Pageable page, @Param("latitude") Double latitude,  @Param("longitude")Double longitude);
+//	default List<Anuncio> findAnuncioRaio(Double latitude,  Double longitude){
+//		Point point = new Point(latitude, longitude);
+//		Distance distance = new Distance(2, Metrics.KILOMETERS);
+//		Circle circle = new Circle(point, distance);
+//		Criteria geoCriteria = Criteria.where("position").withinSphere(circle);
+//		Query query = Query.query(geoCriteria);
+//		
+//	}
 	
 }

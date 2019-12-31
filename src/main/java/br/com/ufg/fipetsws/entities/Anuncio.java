@@ -3,6 +3,7 @@ package br.com.ufg.fipetsws.entities;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -28,6 +29,8 @@ public class Anuncio{
 	
 	private Double longitude;
 	
+	private Point point;
+	
 	private String endereco;
 	
 	private String status;
@@ -42,6 +45,15 @@ public class Anuncio{
 	
 	private List<String> imagens;
 	
+	
+	public Point getPoint() {
+		return point;
+	}
+
+	public void setPoint(Point point) {
+		this.point = point;
+	}
+
 	public Anuncio() {}
 	
 	public Anuncio(String id) {
