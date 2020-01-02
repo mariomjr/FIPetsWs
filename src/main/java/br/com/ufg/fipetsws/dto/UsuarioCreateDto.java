@@ -18,6 +18,8 @@ public class UsuarioCreateDto {
 	
 	private String password;
 
+	private String fotoUrl;
+
 	private String cidade;
 
 	public String getNome() {
@@ -90,5 +92,13 @@ public class UsuarioCreateDto {
 
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
+	}
+
+	public String getFotoUrl() {
+		return fotoUrl;
+	}
+
+	public void setFotoUrl(String fotoUrl) {
+		this.fotoUrl = fotoUrl;
 	}
 }

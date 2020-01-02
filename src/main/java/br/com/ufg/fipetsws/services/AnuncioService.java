@@ -19,5 +19,5 @@ public interface AnuncioService {
 	
 	Page<Anuncio> listAnuncio(int page, int count);
 	
-	Page<Anuncio> listAnuncioRaio(int page, int count, Double latitude, Double longitude);
+	Page<Anuncio> listAnuncioRaio(int page, int count,Double km, Double latitude, Double longitude);
 }

@@ -112,7 +112,12 @@ public class AnuncioController {
 			@PathVariable("count") int count,
 			@RequestBody RaioConsultaDto raioConsulta){
 		Response<List<AnuncioDto>> response = new Response<List<AnuncioDto>>();
-		Page<Anuncio> listAnucio = anuncioService.listAnuncioRaio(page, count, raioConsulta.getLatitude(), raioConsulta.getLongitude());
+		if(raioConsulta.getKm() == null || (raioConsulta.getKm() != null && raioConsulta.getKm() == 0.0)){
+			response.getErrors().add("KM tem que ser maior que 0!");
+			return ResponseEntity.badRequest().body(response);
+		}
+
+		Page<Anuncio> listAnucio = anuncioService.listAnuncioRaio(page, count,raioConsulta.getKm(), raioConsulta.getLatitude(), raioConsulta.getLongitude());
 		if(listAnucio.isEmpty()) {
 			response.getErrors().add("Nenhum anúncio cadastrado!");
 			return ResponseEntity.badRequest().body(response);

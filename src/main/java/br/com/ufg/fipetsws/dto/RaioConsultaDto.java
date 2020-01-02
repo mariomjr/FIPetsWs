@@ -1,9 +1,16 @@
 package br.com.ufg.fipetsws.dto;
 
+import javax.validation.constraints.NotNull;
+
 public class RaioConsultaDto {
 
+	@NotNull
+	private Double km;
+
+	@NotNull
 	private Double latitude;
-	
+
+	@NotNull
 	private Double longitude;
 
 	public Double getLatitude() {
@@ -21,6 +28,12 @@ public class RaioConsultaDto {
 	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
-	
-	
+
+	public Double getKm() {
+		return km;
+	}
+
+	public void setKm(Double km) {
+		this.km = km;
+	}
 }

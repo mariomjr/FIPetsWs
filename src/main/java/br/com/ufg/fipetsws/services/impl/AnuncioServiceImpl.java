@@ -46,9 +46,9 @@ public class AnuncioServiceImpl implements AnuncioService{
 	}
 
 	@Override
-	public Page<Anuncio> listAnuncioRaio(int page, int count, Double latitude, Double longitude) {
+	public Page<Anuncio> listAnuncioRaio(int page, int count,Double km, Double latitude, Double longitude) {
 		Point point = new Point(latitude, longitude);
-		Distance distance = new Distance(2, Metrics.KILOMETERS);
+		Distance distance = new Distance(km, Metrics.KILOMETERS);
 		Circle circle = new Circle(point, distance);
 		return this.anuncioRepository.findByLocationWithin(PageRequest.of(page, count), new Sphere(circle));
 	}

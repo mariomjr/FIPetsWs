@@ -18,6 +18,8 @@ public class UsuarioDto {
 	
 	private String redeSocialContato;
 
+	private String fotoUrl;
+
 	private String cidade;
 
 	public String getId() {
@@ -82,6 +84,14 @@ public class UsuarioDto {
 
 	public void setRedeSocialContato(String redeSocialContato) {
 		this.redeSocialContato = redeSocialContato;
+	}
+
+	public String getFotoUrl() {
+		return fotoUrl;
+	}
+
+	public void setFotoUrl(String fotoUrl) {
+		this.fotoUrl = fotoUrl;
 	}
 
 	public String getCidade() {

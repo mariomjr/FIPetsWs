@@ -37,6 +37,8 @@ public class Usuario{
 	
 	private String uidFirebase;
 
+	private String fotoUrl;
+
 	private String cidade;
 	
 //	Endereço
@@ -130,6 +132,14 @@ public class Usuario{
 
 	public void setUidFirebase(String uidFirebase) {
 		this.uidFirebase = uidFirebase;
+	}
+
+	public String getFotoUrl() {
+		return fotoUrl;
+	}
+
+	public void setFotoUrl(String fotoUrl) {
+		this.fotoUrl = fotoUrl;
 	}
 
 	public String getCidade() {
