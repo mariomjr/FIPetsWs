@@ -30,8 +30,6 @@ public class Anuncio{
 	
 	private Double longitude;
 	
-	private GeoJsonPoint location;
-	
 	private String endereco;
 	
 	private String status;
@@ -45,6 +43,20 @@ public class Anuncio{
 	private Long visualizacoes;
 	
 	private List<String> imagens;
+
+	/**
+	 * {@code location} is stored in GeoJSON format.
+	 *
+	 * <pre>
+	 * <code>
+	 * {
+	 *   "type" : "Point",
+	 *   "coordinates" : [ x, y ]
+	 * }
+	 * </code>
+	 * </pre>
+	 */
+	private GeoJsonPoint location;
 
 	public GeoJsonPoint getLocation() {
 		return location;
