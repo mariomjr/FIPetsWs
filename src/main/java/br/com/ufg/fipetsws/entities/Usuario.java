@@ -36,6 +36,8 @@ public class Usuario{
 	private List<Anuncio> listAnuncioSeguidos;
 	
 	private String uidFirebase;
+
+	private String cidade;
 	
 //	Endereço
 //	Notificações
@@ -128,6 +130,14 @@ public class Usuario{
 
 	public void setUidFirebase(String uidFirebase) {
 		this.uidFirebase = uidFirebase;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
 	}
 
 	@Override

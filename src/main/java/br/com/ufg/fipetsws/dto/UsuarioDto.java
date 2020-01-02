@@ -17,7 +17,9 @@ public class UsuarioDto {
 	private Long dataUltimaAtualizacao;
 	
 	private String redeSocialContato;
-	
+
+	private String cidade;
+
 	public String getId() {
 		return id;
 	}
@@ -82,4 +84,11 @@ public class UsuarioDto {
 		this.redeSocialContato = redeSocialContato;
 	}
 
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
 }

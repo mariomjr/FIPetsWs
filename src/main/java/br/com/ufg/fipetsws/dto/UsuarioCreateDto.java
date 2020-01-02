@@ -17,7 +17,8 @@ public class UsuarioCreateDto {
 	private String redeSocialContato;
 	
 	private String password;
-	
+
+	private String cidade;
 
 	public String getNome() {
 		return nome;
@@ -82,6 +83,12 @@ public class UsuarioCreateDto {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
 
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
 }

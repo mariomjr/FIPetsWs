@@ -12,8 +12,6 @@ import org.springframework.data.geo.Metrics;
 import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.data.mongodb.core.geo.Sphere;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import br.com.ufg.fipetsws.entities.Anuncio;
@@ -55,4 +53,4 @@ public class AnuncioServiceImpl implements AnuncioService{
 		return this.anuncioRepository.findByLocationWithin(PageRequest.of(page, count), new Sphere(circle));
 	}
 
-}	
+}
