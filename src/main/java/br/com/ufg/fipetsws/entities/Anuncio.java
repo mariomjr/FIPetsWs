@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.geo.Point;
+import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -29,7 +30,7 @@ public class Anuncio{
 	
 	private Double longitude;
 	
-	private Point point;
+	private GeoJsonPoint location;
 	
 	private String endereco;
 	
@@ -44,14 +45,13 @@ public class Anuncio{
 	private Long visualizacoes;
 	
 	private List<String> imagens;
-	
-	
-	public Point getPoint() {
-		return point;
+
+	public GeoJsonPoint getLocation() {
+		return location;
 	}
 
-	public void setPoint(Point point) {
-		this.point = point;
+	public void setLocation(GeoJsonPoint location) {
+		this.location = location;
 	}
 
 	public Anuncio() {}

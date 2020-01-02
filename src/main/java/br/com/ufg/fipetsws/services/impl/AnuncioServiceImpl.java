@@ -10,6 +10,7 @@ import org.springframework.data.geo.Circle;
 import org.springframework.data.geo.Distance;
 import org.springframework.data.geo.Metrics;
 import org.springframework.data.geo.Point;
+import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 
 	@Override
 	public Anuncio createOrUpdate(Anuncio anucio) {
-		anucio.setPoint(new Point(anucio.getLatitude(), anucio.getLongitude()));
+		anucio.setLocation(new GeoJsonPoint(new Point(anucio.getLatitude(), anucio.getLongitude())));
 		return this.anuncioRepository.save(anucio);
 	}
 
