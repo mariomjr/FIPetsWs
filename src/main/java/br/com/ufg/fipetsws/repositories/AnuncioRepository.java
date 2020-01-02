@@ -1,5 +1,9 @@
 package br.com.ufg.fipetsws.repositories;
 
+import com.mongodb.client.model.geojson.Polygon;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.mongodb.core.geo.Sphere;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import br.com.ufg.fipetsws.entities.Anuncio;
@@ -23,5 +27,7 @@ public interface AnuncioRepository  extends MongoRepository<Anuncio, String>{
 //		Query query = Query.query(geoCriteria);
 //		
 //	}
+
+    Page<Anuncio> findByLocationWithin(Pageable pageable, Sphere sphere);
 	
 }
