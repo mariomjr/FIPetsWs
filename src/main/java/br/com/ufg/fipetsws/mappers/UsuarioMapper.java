@@ -2,6 +2,7 @@ package br.com.ufg.fipetsws.mappers;
 
 import java.util.List;
 
+import br.com.ufg.fipetsws.dto.UsuarioTokenDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -17,6 +18,8 @@ public interface UsuarioMapper {
 	UsuarioMapper INSTANCE = Mappers.getMapper(UsuarioMapper.class);
 	
 	UsuarioDto paraDto(Usuario usuario);
+
+    UsuarioTokenDto paraTokenDto(Usuario usuario);
 	
 	List<UsuarioDto> paraDto(List<Usuario> usuario);
 	

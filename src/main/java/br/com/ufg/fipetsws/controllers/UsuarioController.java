@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
+import br.com.ufg.fipetsws.dto.UsuarioTokenDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -41,15 +42,17 @@ public class UsuarioController {
 
 	@PostMapping
 	@ApiOperation("Criação do usuário")
-	public ResponseEntity<Response<UsuarioDto>> create(HttpServletRequest request, @RequestBody UsuarioCreateDto usuario,
-			BindingResult result){
-		Response<UsuarioDto> response = new Response<UsuarioDto>();
+	public ResponseEntity<Response<UsuarioTokenDto>> create(HttpServletRequest request, @RequestBody UsuarioCreateDto usuario,
+															BindingResult result){
+		Response<UsuarioTokenDto> response = new Response<UsuarioTokenDto>();
 		try {
 			LoginResponse loginResponse = authFirebaseService.criarUsuario(new AuthRequest(usuario.getEmail(), usuario.getPassword()));
 			Usuario usuarioCre = UsuarioMapper.INSTANCE.doCreateDto(usuario);
 			usuarioCre.setUidFirebase(loginResponse.getLocalId());
 			Usuario usuarioCreate = usuarioService.createOrUpdate(usuarioCre);
-			response.setData(UsuarioMapper.INSTANCE.paraDto(usuarioCreate));
+			UsuarioTokenDto usuarioTokenDto = UsuarioMapper.INSTANCE.paraTokenDto(usuarioCreate);
+			usuarioTokenDto.setIdToken(loginResponse.getIdToken());
+			response.setData(usuarioTokenDto);
 			return ResponseEntity.ok(response);
 		} catch (Exception e) {
 			response.getErrors().add(e.getMessage());
