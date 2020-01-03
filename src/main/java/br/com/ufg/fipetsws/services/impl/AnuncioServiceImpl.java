@@ -41,6 +41,11 @@ public class AnuncioServiceImpl implements AnuncioService{
 	}
 
 	@Override
+	public List<Anuncio> findByUsuarioId(String id) {
+		return this.anuncioRepository.findByUsuarioId(id);
+	}
+
+	@Override
 	public Page<Anuncio> listAnuncio(int page, int count) {
 		return this.anuncioRepository.findAll(PageRequest.of(page, count));
 	}

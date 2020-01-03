@@ -8,6 +8,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import br.com.ufg.fipetsws.entities.Anuncio;
 
+import java.util.List;
+
 public interface AnuncioRepository  extends MongoRepository<Anuncio, String>{
 	
 //	static String SQL_RAIO_ANUNCIO = "SELECT a FROM Anuncio a " + 
@@ -29,5 +31,7 @@ public interface AnuncioRepository  extends MongoRepository<Anuncio, String>{
 //	}
 
     Page<Anuncio> findByLocationWithin(Pageable pageable, Sphere sphere);
+
+    List<Anuncio> findByUsuarioId(String id);
 	
 }

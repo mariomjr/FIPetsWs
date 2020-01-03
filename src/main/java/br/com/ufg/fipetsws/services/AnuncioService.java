@@ -16,6 +16,8 @@ public interface AnuncioService {
 	Optional<Anuncio> findById(String id);
 	
 	List<Anuncio> findAll();
+
+	List<Anuncio> findByUsuarioId(String id);
 	
 	Page<Anuncio> listAnuncio(int page, int count);
 	

@@ -172,8 +172,8 @@ public class AnuncioController {
 		return ResponseEntity.ok(response);
 	}
 	
-	@GetMapping(value ="/usuario/{idUsuario}")
-	@ApiOperation("Listar anuncios do usuario")
+	@GetMapping(value ="/seguidos/usuario/{idUsuario}")
+	@ApiOperation("Listar anuncios seguidos do usuario")
 	public ResponseEntity<Response<List<AnuncioDto>>> get(HttpServletRequest request, @PathVariable("idUsuario") String idUsuario){
 		Response<List<AnuncioDto>> response = new Response<List<AnuncioDto>>();
 		Optional<Usuario> usuario = usuarioService.findById(idUsuario);
@@ -182,6 +182,15 @@ public class AnuncioController {
 			return ResponseEntity.badRequest().body(response);
 		}
 		response.setData(AnuncioMapper.INSTANCE.paraDto(usuario.get().getListAnuncioSeguidos()));
+		return ResponseEntity.ok(response);
+	}
+
+	@GetMapping(value ="/usuario/{idUsuario}")
+	@ApiOperation("Listar anuncios do usuario")
+	public ResponseEntity<Response<List<AnuncioDto>>> getAnuncioUsuario(HttpServletRequest request, @PathVariable("idUsuario") String idUsuario){
+		Response<List<AnuncioDto>> response = new Response<List<AnuncioDto>>();
+		List<Anuncio> listAnuncios = anuncioService.findByUsuarioId(idUsuario);
+		response.setData(AnuncioMapper.INSTANCE.paraDto(listAnuncios));
 		return ResponseEntity.ok(response);
 	}
 	
